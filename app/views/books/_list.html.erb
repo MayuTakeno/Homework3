@@ -1,0 +1,31 @@
+<!-- 部分テンプレート -->
+
+<div class="side-bar">
+    <div class="user-infomation">
+      <h1>User info</h1>
+      <%= image_tag user.get_profile_image(100, 100) %>
+      <p>Name <%= user.name %></p>
+      <p>introduction <%= user.introduction %></p>
+      <%= link_to "user-edit", edit_user_path(user) %>
+    </div>
+    <!-- エラーメッセージの表示 -->
+    <div class="book-new">
+      <%= form_with model: book do |f| %>
+      <h1>NewBook</h1>
+      <% if book.errors.any? %>
+        <%= book.errors.count %>errors
+        <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <h4>title</h4>
+        <%= f.text_field :title %>
+      <h4>Opinion</h4>
+        <%= f.text_area :body %>
+        <%= f.submit "Create Book" %>
+        <% end %>
+    </div>
+  </div>
