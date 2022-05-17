@@ -10,7 +10,8 @@ class User < ApplicationRecord
         validates :name, presence: true
 
         has_one_attached :profile_image
-
+        
+        #特定の処理を名前で呼び出す
         def get_profile_image(width, height)
           unless profile_image.attached?
             file_path = Rails.root.join('app/assets/images/no_image.jpg')

@@ -1,17 +1,34 @@
 <!-- 部分テンプレート -->
 
-<div class="side-bar">
-    <div class="user-infomation">
-      <h1>User info</h1>
-      <%= image_tag user.get_profile_image(100, 100) %>
-      <p>Name <%= user.name %></p>
-      <p>introduction <%= user.introduction %></p>
-      <%= link_to "user-edit", edit_user_path(user) %>
+
+<div class="container px-5 px-sm-0">
+  <div class="user-info">
+    <div class="row">
+      <div class="col-md-3">
+        <h2>User info</h2>
+        <%= image_tag user.get_profile_image(100, 100) %>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>name<span class="user-info-blank1"></span><%= user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction<span class="user-info-blank2"></span><%= user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to edit_user_path(user), class: "btn btn-info btn-sm btn-block sm-3" do %>
+            <i class="fa-solid fa-user-gear"></i>
+          <% end %>
+        </div>
+      </div>
     </div>
+  </div>
     <!-- エラーメッセージの表示 -->
     <div class="book-new">
       <%= form_with model: book do |f| %>
-      <h1>NewBook</h1>
+      <h2>NewBook</h2>
       <% if book.errors.any? %>
         <%= book.errors.count %>errors
         <ul>
@@ -21,11 +38,12 @@
         </ul>
       <% end %>
 
-      <h4>title</h4>
-        <%= f.text_field :title %>
-      <h4>Opinion</h4>
-        <%= f.text_area :body %>
-        <%= f.submit "Create Book" %>
-        <% end %>
+        <h4>title</h4>
+          <%= f.text_field :title %>
+        <h4>Opinion</h4>
+          <%= f.text_area :body %>
+          <br>
+          <%= f.submit "Create Book" %>
+          <% end %>
     </div>
   </div>
