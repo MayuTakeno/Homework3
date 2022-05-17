@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
+      flash[:notice] = "successfully"
       redirect_to books_path
     else
       render :books_path
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
     @book = @user
     @users = User.all
     if @user.update(user_params)
+      flash[:notice] = "successfully"
       redirect_to books_path
     else
       render :index
