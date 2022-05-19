@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit ]
 
   def create
     @book = Book.new(book_params)
@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
