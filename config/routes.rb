@@ -6,12 +6,12 @@ Rails.application.routes.draw do
   #homes/topをrootディレクトリに指定
   root to: "homes#top"
   #homes/aboutを名前付きルートをaboutに指定
-  get "homes/about" => "homes#about", as: "about"
+  get "home/about" => "homes#about", as: "about"
 
   patch "books/:id" => "books#update", as: "update_book"
   patch "users/:id" => "users#update", as: "update_user"
 
-  resources :homes
+  resources :homes, only: [:top, :about]
   #Booksのルーティングを一括生成(index/create/show/edit/update/destroy)
   resources :books, only: [:index, :create, :show, :edit, :update, :destroy]
   #usersのルーティングを一括生成(index/create/show/edit/update)

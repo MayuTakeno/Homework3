@@ -1,5 +1,14 @@
 <!-- 投稿一覧画面 -->
 
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <!-- サクセスメッセージの表示 -->
 <% if flash[:notice] %>
   <p id="notice">
@@ -17,6 +26,14 @@
       <!-- 部分テンプレートの参照-->
       <div class="col-md-3">
         <%= render 'list', book: @book, user: @user %>
+          <% if @book.errors.any? %>
+          <%= @book.errors.count %>errors
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
       </div>
       <!-- 参照終了 -->
 
@@ -36,7 +53,11 @@
           <tbody>
             <% @books.each do |book| %>
             <tr>
-              <td class="profile-image"><%= image_tag book.user.get_profile_image(100, 100) %></td>
+              <td class="profile-image">
+                <%= link_to user_path(book.user.id) do %>
+                  <%= image_tag book.user.get_profile_image(100, 100) %>
+                <% end %>
+              </td>
               <td class="book2-title"><%= link_to book.title, "/books/#{book.id}" %></td>
               <td class="book2-body"><%= book.body %></td>
             </tr>

@@ -33,9 +33,9 @@ class UsersController < ApplicationController
     @users = User.all
     if @user.update(user_params)
       flash[:notice] = "successfully"
-      redirect_to books_path
+      redirect_to user_path(current_user.id)
     else
-      render :index
+      render :edit
     end
 
   end
