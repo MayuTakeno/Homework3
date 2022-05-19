@@ -1,20 +1,46 @@
+<!-- 投稿詳細画面 -->
+
 <% if flash[:notice] %>
   <p id="notice">
     <%= flash[:notice] %>
   </p>
 <% end %>
 
-<h1>Book detail</h1>
-<p> <%= image_tag @book.user.get_profile_image(100, 100) %></p>
-<p><%= link_to @book.user.name, user_path(@book.user.id) %></p>
-<h2>Title</h2>
-<p><%= @book.title %></p>
-<h2>Opinion</h2>
-<p><%= @book.body %></p>
+   <div class="blogbar">
+      <div class="container px-5">
+        <div class="row">
 
-  <% if user_signed_in? && @book.user_id == current_user.id %>
-    <%= link_to 'edit', edit_book_path %>
-    <%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+          <div class="col-md-3">
+            <%= render 'list', book: @book_new, user: @user %>
+          </div>
 
-<%= render 'list', book: @book_new, user: @user %>
+          <div class="col-md-8 offset-md-1">
+            <h2>Book detail</h2>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="detail-table-title">Title</th>
+                  <th class="detail-table-body">Opinion</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="detail-image"> <%= image_tag @book.user.get_profile_image(100, 100) %><br><%= link_to @book.user.name, user_path(@book.user.id) %></td>
+                  <td class="detail-title"><%= @book.title %></td>
+                  <td class="detail-body"><%= @book.body %></td>
+                  <% if @book.user == current_user %>
+                    <td><%= link_to 'edit', edit_book_path %></td>
+                    <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+   </div>

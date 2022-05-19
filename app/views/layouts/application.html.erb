@@ -10,84 +10,81 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <style>
 
-header li{
-  margin-right:20px;
-}
-.table{
-  border-collapse: collapse;
-}
-.user-info-blank1{
-  margin-right: 105px;
-}
-.book-new{
-  margin-top: 20px;
-}
-.book-new h4{
-  font-size: 16px;
-}
-.user-info th{
-  font-size: 16px;
-}
-
-  </style>
   </head>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="/"><span>Bookers</span></a>
+        <a class="navbar-brand" href="/">
+          <span>Bookers</span>
+        </a>
         <button class="navbar-toggler" type="button"data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+
+              <!-- ログイン中 -->
               <% if user_signed_in? %>
 
-                <li>
-                  <%= link_to user_path(current_user.id) do %>
+                <!-- Homeリンク -->
+                <li class="nav-link">
+                  <%= link_to user_path(current_user.id), class: 'text-light' do %>
                     <i class="fas fa-home"></i>Home
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to users_path do %>
-                    <i class="fa-solid fa-users"></i>Users
+
+                <!-- Usersリンク -->
+                <li class="nav-link">
+                  <%= link_to users_path, class: 'text-light' do %>
+                    <i class="fas fa-users"></i>Users
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to books_path do %>
-                    <i class="fas fa-book-open"></i>Book
+
+                <!-- Bookリンク -->
+                <li class="nav-link">
+                  <%= link_to books_path, class: 'text-light' do %>
+                    <i class="fas fa-book-open"></i>Books
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to destroy_user_session_path, method: :delete do %>
+
+                <!-- Log outリンク -->
+                <li class="nav-link">
+                  <%= link_to destroy_user_session_path, class: 'text-light', method: :delete do %>
                     <i class="fas fa-sign-out-alt"></i>Log out
                   <% end %>
                 </li>
-              </ul>
-              <% else %>
-              <ul class="navbar-nav ml-auto">
 
-                <li>
-                  <%= link_to root_path do %>
+              </ul>
+
+              <!-- 未ログ中 -->
+              <% else %>
+              <ul class="navbar-nav">
+
+                <!--Homeリンク -->
+                <li class="nav-link">
+                  <%= link_to root_path, class: 'text-light' do %>
                     <i class="fas fa-home"></i> Home
                   <% end %>
                 </li>
 
-                <li>
-                  <%= link_to about_path do %>
+                <!-- aboutリンク -->
+                <li class="nav-link">
+                  <%= link_to about_path, class: 'text-light' do %>
                     <i class="fas fa-link"></i> About
                   <% end %>
                 </li>
 
-                <li>
-                  <%= link_to new_user_registration_path do %>
+                <!-- Sign upリンク -->
+                <li class="nav-link">
+                  <%= link_to new_user_registration_path, class: 'text-light' do %>
                     <i class="fas fa-user-plus"></i> Sign up
                   <% end %>
                 </li>
 
-                <li>
-                  <%= link_to new_user_session_path do %>
+                <!-- Log inリンク -->
+                <li class="nav-link">
+                  <%= link_to new_user_session_path, class: 'text-light' do %>
                     <i class="fas fa-sign-in-alt"></i> Log in
                   <% end %>
                 </li>
@@ -99,5 +96,12 @@ header li{
     </nav>
   </header>
   <%= yield %>
+  <footer>
+    <div class="row">
+      <div class="mx-auto center ">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>

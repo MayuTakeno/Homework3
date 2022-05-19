@@ -1,25 +1,45 @@
-<h1>Users</h1>
-<table>
-  <thead class="user-thead">
-    <tr>
-      <th class="user-table-image">image</th>
-      <th class="user-table-name">name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody class="user-tbody">
-    <tr>
-      <% @users.each do |user| %>
-        <td class="user-prof">
-          <%= user.name %>
-        </td>
-        <td class="link-to-show">
-          <%= link_to "Show", user_path(user.id) %>
-        </td>
-        <% end %>
-    </tr>
-  </tbody>
-</table>
+<!-- ユーザ一覧画面 -->
 
-<%= render '/books/list', book: @book, user: @user %>
+<!-- indexクラス -->
+<div class="index">
+
+  <!-- bootstrap使用宣言 -->
+  <div class="container px-5">
+    <div class="row">
+
+      <!-- 部分テンプレートの参照 -->
+      <div class="col-md-3">
+        <%= render '/books/list', book: @book, user: @user %>
+      </div>
+      <!-- 参照終了-->
+
+      <!-- カラム８とオフセット一つ分 -->
+      <div class="col-md-8 offset-md-1">
+
+        <h1>Users</h1>
+          <!-- users/一覧テーブルの生成 -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="user-table-image">image</th>
+                <th class="user-table-name">name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="user-tbody">
+              <% @users.each do |user| %>
+              <tr>
+                <td class="users-image"><%= image_tag user.get_profile_image(100, 100) %></td>
+                <td class="user-prof"><%= user.name %></td>
+                <td class="link-to-show"><%= link_to "Show", user_path(user.id) %></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 

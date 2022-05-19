@@ -7,10 +7,11 @@ class User < ApplicationRecord
          #Userが削除された時、Userが投稿した投稿したBookを全て削除する
         has_many :books, dependent: :destroy
 
-        validates :name, presence: true
+        validates :name, uniqueness: true, length: { in: 2..20 }
+        validates :introduction, length: { maximum: 50 }
 
         has_one_attached :profile_image
-        
+
         #特定の処理を名前で呼び出す
         def get_profile_image(width, height)
           unless profile_image.attached?
